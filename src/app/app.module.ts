@@ -18,10 +18,10 @@ import { MatIconModule, MatFormFieldModule, MatInputModule, MatSelectModule } fr
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatIconModule,
     FormsModule,
-    MatInputModule,
     MatFormFieldModule,
+    MatIconModule,
+    MatInputModule,
     MatSelectModule
   ],
   providers: [],

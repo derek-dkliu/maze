@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BoardComponent } from './board.component';
+import { FormsModule } from '@angular/forms';
+import { MatFormFieldModule, MatIconModule, MatInputModule, MatSelectModule } from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('BoardComponent', () => {
   let component: BoardComponent;
@@ -8,7 +11,15 @@ describe('BoardComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ BoardComponent ]
+      declarations: [ BoardComponent ],
+      imports: [
+        BrowserAnimationsModule,
+        FormsModule,
+        MatFormFieldModule,
+        MatIconModule,
+        MatInputModule,
+        MatSelectModule
+      ]
     })
     .compileComponents();
   }));

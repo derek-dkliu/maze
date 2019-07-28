@@ -3,33 +3,31 @@ import { Maze } from './maze';
 export class Backtracker extends Maze {
 
   public create(board: boolean[][], row: number, col: number): void {
-    const x0 = 0;
-    const y0 = 0;
-    board[y0 * 2 + 1][x0 * 2 + 1] = true;
-    const stack = [[x0, y0]];
-    while (stack.length !== 0) {
-      const [x, y] = stack[stack.length - 1];
+    board[1][1] = true;
+    this.dfs(board, row, col, 0, 0);
+  }
 
-      const options = [];
-      for (const direction of this.directions) {
-        const r = (direction[1] + y) * 2 + 1;
-        const c = (direction[0] + x) * 2 + 1;
-        if (r > 0 && r < row - 1 && c > 0 && c < col - 1 && board[r][c] === false) {
-          options.push([direction[0], direction[1]]);
-        }
+  public dfs(board: boolean[][], row: number, col: number, r0: number, c0: number): void {
+    const directions = this.directions.slice();
+    this.shuffle(directions);
+
+    for (const direction of directions) {
+      const r = direction[0] + r0;
+      const c = direction[1] + c0;
+      const rr = r * 2 + 1;
+      const cc = c * 2 + 1;
+      if (rr > 0 && rr < row - 1 && cc > 0 && cc < col - 1 && board[rr][cc] === false) {
+        board[rr][cc] = true;
+        board[rr - direction[0]][cc - direction[1]] = true;
+        this.dfs(board, row, col, r, c);
       }
+    }
+  }
 
-      if (options.length > 0) {
-        const [dx, dy] = options[Math.floor(Math.random() * options.length)];
-        const xx = x + dx;
-        const yy = y + dy;
-        stack.push([xx, yy]);
-        board[yy * 2 + 1][xx * 2 + 1] = true;
-        board[dy + y * 2 + 1][dx + x * 2 + 1] = true;
-
-      } else {
-        stack.pop();
-      }
+  private shuffle(array: number[][]): void {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
     }
   }
 }
