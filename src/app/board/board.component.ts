@@ -47,7 +47,7 @@ export class BoardComponent implements OnInit {
   public mazeChoice = 0;
   public mazeOptions = MAZE_OPTIIONS;
 
-  @ViewChild('canvas')
+  @ViewChild('canvas', { static: true })
   private canvasRef: ElementRef;
 
   ngOnInit() {
